@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libssl-dev \
     unzip \
     libssl3 \
+    ca-certificates \
     pkg-config && \
     rm -rf /var/lib/apt/lists/*
 
@@ -24,6 +25,7 @@ RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 RUN rustup update
 RUN cargo install --locked maturin
+
 
 # Download and prepare the pgr-tk binary
 WORKDIR /opt
