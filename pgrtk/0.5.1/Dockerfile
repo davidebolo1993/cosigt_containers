@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ssh \
     curl \
     wget \
-    clang-14 \
+    clang \
     cmake \
     libssl-dev \
     unzip \
