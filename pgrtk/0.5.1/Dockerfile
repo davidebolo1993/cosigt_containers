@@ -38,7 +38,6 @@ FROM debian:bullseye-slim
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libstdc++6 \
     libgcc-s1 \
-    libm6 \
     libc6 \
     ca-certificates && \
     rm -rf /var/lib/apt/lists/*
