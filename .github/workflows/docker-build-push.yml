@@ -7,34 +7,54 @@ on:
       - master
 
 jobs:
-  build-and-push:
+  detect-and-build:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Needed for git diff
 
-      # Log in to DockerHub
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
       - name: Log in to DockerHub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # Build and push Docker images
-      - name: Build and push Docker images with tool and version
+      - name: Detect changed Dockerfiles and build images
         run: |
-          # Find all Dockerfiles in <tool>/<version>/Dockerfile
+          # Get the hash of the previous successful commit
+          PREVIOUS_COMMIT=$(git rev-list --no-merges -n 1 HEAD^)
+          
+          # Find all Dockerfiles that have changed
+          changed_files=$(git diff --name-only $PREVIOUS_COMMIT HEAD)
+          
+          # Process each Dockerfile in the repository
           for dockerfile in $(find . -type f -name Dockerfile); do
-            # Extract the tool name and version from the path
             tool=$(basename $(dirname $(dirname "$dockerfile")))
             version=$(basename $(dirname "$dockerfile"))
-
-            # Build the Docker image
-            docker build -t ${{ secrets.DOCKER_USERNAME }}/$tool:$version -f "$dockerfile" "$(dirname "$dockerfile")"
-
-            # Push the Docker image
-            docker push ${{ secrets.DOCKER_USERNAME }}/$tool:$version
+            dockerfile_dir=$(dirname "$dockerfile")
+            
+            # Check if Dockerfile or any file in its directory has changed
+            if echo "$changed_files" | grep -q "^${dockerfile_dir#./}/" || \
+               echo "$changed_files" | grep -q "^${dockerfile_dir#./}/Dockerfile$"; then
+              echo "Changes detected in $tool:$version, building..."
+              
+              # Build and push the Docker image
+              docker buildx build \
+                --cache-from type=registry,ref=${{ secrets.DOCKER_USERNAME }}/$tool:$version \
+                --cache-to type=inline \
+                --platform linux/amd64 \
+                --tag ${{ secrets.DOCKER_USERNAME }}/$tool:$version \
+                --push \
+                -f "$dockerfile" "$dockerfile_dir"
+              
+              echo "Successfully built and pushed ${{ secrets.DOCKER_USERNAME }}/$tool:$version"
+            else
+              echo "No changes detected for $tool:$version, skipping..."
+            fi
           done
-

@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libncursesw5-dev \
     git \
     libbz2-dev \
+    liblzma-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Set workdir
