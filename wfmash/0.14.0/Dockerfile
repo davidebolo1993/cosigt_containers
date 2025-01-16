@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libbz2-dev \
     wget \
     ca-certificates \
+    pkg-config \
     && rm -rf /var/lib/apt/lists/*
 
 #Set workdir
