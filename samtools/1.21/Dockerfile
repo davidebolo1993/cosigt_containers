@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     pkg-config \
     libncurses5-dev \
     libncursesw5-dev \
+    libbz2-dev \
     && rm -rf /var/lib/apt/lists/*
 
 #Set workdir
