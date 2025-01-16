@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libhts-dev \
     liblzma-dev \
     libbz2-dev \
+    wget \
     && rm -rf /var/lib/apt/lists/*
 
 #Set workdir
