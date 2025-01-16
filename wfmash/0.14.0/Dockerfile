@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     liblzma-dev \
     libbz2-dev \
     wget \
+    ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
 #Set workdir
