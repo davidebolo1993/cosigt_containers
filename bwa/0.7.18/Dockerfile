@@ -21,10 +21,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libbz2-dev \
     && rm -rf /var/lib/apt/lists/*
 
-#Set workdir
+# Set workdir
 WORKDIR /opt
 
-#install bwa
+# Install bwa
 RUN git clone https://github.com/lh3/bwa.git \
 	&& cd bwa \
 	&& git checkout 79b230de48c74156f9d3c26795a360fc5a2d5d3b \

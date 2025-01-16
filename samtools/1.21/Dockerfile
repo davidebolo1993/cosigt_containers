@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 #Set workdir
 WORKDIR /opt
 
-# Install
+# Install samtools
 RUN wget https://github.com/samtools/samtools/releases/download/1.21/samtools-1.21.tar.bz2 \
 	&& tar -jxvf samtools-1.21.tar.bz2 \
 	&& rm samtools-1.21.tar.bz2 \
