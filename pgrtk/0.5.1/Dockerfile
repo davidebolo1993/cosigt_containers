@@ -1,5 +1,5 @@
-# Build stage: Use bullseye-slim as the base image for minimal footprint
-FROM debian:bullseye-slim AS build
+# Build stage - as recommended here: https://github.com/GeneDx/pgr-tk/blob/main/docker/Dockerfile.build_env-22.04
+FROM ubuntu:22.04 
 
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
@@ -11,10 +11,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ssh \
     curl \
     wget \
-    clang \
+    clang-14 \
     cmake \
     libssl-dev \
     unzip \
+    libssl3 \
     pkg-config && \
     rm -rf /var/lib/apt/lists/*
 
