@@ -1,0 +1,32 @@
+# Build stage
+FROM debian:bullseye-slim AS binary
+
+# Set environment variables
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install build dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    git \
+    curl
+
+# Install Rust and maturin
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
+ENV PATH="/root/.cargo/bin:${PATH}"
+RUN rustup update
+RUN cargo install --locked maturin
+
+#Set workdir
+WORKDIR /opt
+
+# Install gfainject
+RUN git clone https://github.com/AndreaGuarracino/gfainject \
+	&& cd gfainject \
+	&& git checkout b32b2a03b90d4c9ae935737b3bd7bd86ca8a2d78 \
+	&& cargo install --force --path .
+
+# Set env path
+ENV PATH /opt/gfainject/target/release:$PATH
+
+# Default command
+CMD ["gfainject"]
