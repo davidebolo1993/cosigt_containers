@@ -9,7 +9,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     wget \
     ca-certificates \
-    software-properties-common
+    software-properties-common \
+    git \
+    pkg-config
 
 RUN add-apt-repository ppa:longsleep/golang-backports
 
