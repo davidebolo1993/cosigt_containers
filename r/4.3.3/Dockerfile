@@ -18,7 +18,7 @@ RUN bash Miniconda3-latest-Linux-x86_64.sh -p /miniconda -b && \
 ENV PATH=/miniconda/bin:${PATH}
 RUN conda update -y conda && \
         conda create -y -n renv -c conda-forge -c bioconda \
-	r-base \
+	r-base=4.3.3 \
 	r-data.table=1.15.4 \
 	r-rjson=0.2.23 \
 	r-reshape2=1.4.4 \
