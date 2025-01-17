@@ -15,9 +15,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 WORKDIR /opt
 
 # Install megadepth
-## install megadepth
 RUN wget https://github.com/ChristopherWilks/megadepth/releases/download/1.2.0/megadepth \
 	&& chmod +x megadepth
+
+# Set path
+ENV PATH /opt:$PATH
 
 # Default command
 CMD ["megadepth"]
