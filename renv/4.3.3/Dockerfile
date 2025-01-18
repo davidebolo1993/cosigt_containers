@@ -29,6 +29,7 @@ RUN conda update -y conda && \
 	bioconductor-rtracklayer=1.62.0 \
 	r-randomcolor=1.1.0.1 \
         r-pafr=0.0.2 \
-        r-tidyverse=2.0.0
+        r-tidyverse=2.0.0 \
+        r-r.utils=2.12.3
 RUN echo "source activate renv" > ~/.bashrc
 ENV PATH /miniconda/envs/renv/bin:$PATH
