@@ -30,6 +30,7 @@ RUN conda update -y conda && \
 	r-randomcolor=1.1.0.1 \
         r-pafr=0.0.2 \
         r-tidyverse=2.0.0 \
-        r-r.utils=2.12.3
+        r-r.utils=2.12.3 \
+	r-dbscan
 RUN echo "source activate renv" > ~/.bashrc
 ENV PATH /miniconda/envs/renv/bin:$PATH
