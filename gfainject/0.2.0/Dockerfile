@@ -25,7 +25,7 @@ WORKDIR /opt
 # Install gfainject
 RUN git clone https://github.com/AndreaGuarracino/gfainject \
 	&& cd gfainject \
-	&& git checkout b32b2a03b90d4c9ae935737b3bd7bd86ca8a2d78 \
+	&& git checkout 48c98e01b39d0cec71c9130898cbd8fa95bdac80 \
 	&& cargo install --force --path .
 
 # Set env path
