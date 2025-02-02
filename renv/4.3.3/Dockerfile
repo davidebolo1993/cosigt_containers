@@ -35,12 +35,12 @@ RUN conda update -y conda && \
 	r-ggnewscale=0.5.0 \
 	r-ggforce=0.4.2 \
 	bioconductor-s4vectors=0.44.0 \
-	bioconductor-bsgenome=1.74.0 \
+	bioconductor-bsgenome \
 	bioconductor-genomicranges=1.58.0 \
 	bioconductor-biostrings=2.74.0 \
 	bioconductor-iranges=2.40.0 \
 	bioconductor-genomeinfodb=1.42.0 \
-	bioconductor-rsamtools=2.22.0 \
+	bioconductor-rsamtools \
 	r-wesanderson=0.3.7 \
 	r-dbscan=1.2.2
 RUN echo "source activate renv" > ~/.bashrc
