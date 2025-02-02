@@ -34,12 +34,12 @@ RUN conda update -y conda && \
         r-r.utils=2.12.3 \
 	r-ggnewscale=0.5.0 \
 	r-ggforce=0.4.2 \
-	bioconductor-s4vectors=0.44.0 \
+	bioconductor-s4vectors \
 	bioconductor-bsgenome \
 	bioconductor-genomicranges=1.58.0 \
 	bioconductor-biostrings=2.74.0 \
 	bioconductor-iranges=2.40.0 \
-	bioconductor-genomeinfodb=1.42.0 \
+	bioconductor-genomeinfodb \
 	bioconductor-rsamtools \
 	r-wesanderson=0.3.7 \
 	r-dbscan=1.2.2
