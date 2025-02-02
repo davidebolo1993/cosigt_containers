@@ -32,16 +32,16 @@ RUN conda update -y conda && \
         r-pafr=0.0.2 \
         r-tidyverse=2.0.0 \
         r-r.utils=2.12.3 \
-	r-ggnewscale=0.5.0 \
-	r-ggforce=0.4.2 \
+	r-ggnewscale \
+	r-ggforce \
 	bioconductor-s4vectors \
 	bioconductor-bsgenome \
-	bioconductor-genomicranges=1.58.0 \
-	bioconductor-biostrings=2.74.0 \
-	bioconductor-iranges=2.40.0 \
+	bioconductor-genomicranges \
+	bioconductor-biostrings \
+	bioconductor-iranges \
 	bioconductor-genomeinfodb \
 	bioconductor-rsamtools \
-	r-wesanderson=0.3.7 \
+	r-wesanderson \
 	r-dbscan=1.2.2
 RUN echo "source activate renv" > ~/.bashrc
 ENV PATH /miniconda/envs/renv/bin:$PATH
