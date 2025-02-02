@@ -49,5 +49,5 @@ RUN conda update -y conda && \
 	r-curl
 RUN echo "source activate renv" > ~/.bashrc
 ENV PATH /miniconda/envs/renv/bin:$PATH
-RUN echo "devtools::install_github('daewoooo/SVbyEye', branch='master', upgrade_dependencies=FALSE)" > install.r && \
+RUN echo "devtools::install_github('daewoooo/SVbyEye', branch='master', upgrade='never')" > install.r && \
 	Rscript install.r
