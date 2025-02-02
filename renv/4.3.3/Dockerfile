@@ -19,7 +19,7 @@ ENV PATH=/miniconda/bin:${PATH}
 RUN conda update -y conda && \
         conda create -y -n renv -c conda-forge -c bioconda -c r \
 	r-base=4.3.3 \
-	r-data.table=1.15.4 \
+	r-data.table=1.16.4 \
 	r-rjson=0.2.23 \
 	r-reshape2=1.4.4 \
 	r-nbclust=3.0.1 \
@@ -42,6 +42,9 @@ RUN conda update -y conda && \
 	bioconductor-genomeinfodb \
 	bioconductor-rsamtools \
 	r-wesanderson \
+	r-abind=1.4_5 \
+	r-xml \
+	r-v8=5.0.1 \
 	r-dbscan=1.2.2
 RUN echo "source activate renv" > ~/.bashrc
 ENV PATH /miniconda/envs/renv/bin:$PATH
