@@ -46,7 +46,8 @@ RUN conda update -y conda && \
 	r-xml \
 	r-v8 \
 	r-dbscan=1.2.2 \
-	r-curl
+	r-curl \
+	r-ggforce
 RUN echo "source activate renv" > ~/.bashrc
 ENV PATH /miniconda/envs/renv/bin:$PATH
 RUN echo "devtools::install_github('daewoooo/SVbyEye', branch='master', upgrade='never')" > install.r && \
