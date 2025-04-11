@@ -27,7 +27,7 @@ WORKDIR /opt
 # Install cosigt
 RUN git clone https://github.com/davidebolo1993/cosigt.git \
 	&& cd cosigt \
-	&& git checkout 5913c699922a45b990ef45e5dcbb322c5077bba4 \
+	&& git checkout 97fd01f1147cfc999800531a58cb9f43cf451703 \
 	&& go mod init cosigt \
 	&& go mod tidy \
 	&& go build cosigt \
