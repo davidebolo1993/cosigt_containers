@@ -11,15 +11,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     software-properties-common \
     git \
-    pkg-config
+    pkg-config \
+    snapd
 
-RUN add-apt-repository ppa:longsleep/golang-backports
-
-RUN apt-get -y install golang-go \
-	&& apt-get -y clean all \
+RUN apt-get -y clean all \
 	&& apt-get -y purge \
 	&& rm -rf /var/cache \
 	&& rm -rf /var/lib/apt/lists/*
+
+#install go
+RUN snap install go --channel=1.19.1/stable --classic
 
 # Set workdir
 WORKDIR /opt
@@ -41,3 +42,4 @@ ENV PATH /opt:$PATH
 
 # Default command
 CMD ["cosigt"]
+
