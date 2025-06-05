@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     curl \
     cmake \
+    wget \
     ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 
@@ -38,7 +39,6 @@ RUN wget https://github.com/arq5x/bedtools2/releases/download/v2.31.0/bedtools.s
 
 #Set path
 ENV PATH /opt:$PATH
-
 
 # Default command
 CMD ["impg"]
