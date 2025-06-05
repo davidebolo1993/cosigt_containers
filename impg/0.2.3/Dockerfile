@@ -31,5 +31,14 @@ RUN git clone https://github.com/pangenome/impg \
 # Set env path
 ENV PATH /opt/impg/target/release:$PATH
 
+# Install bedtools
+RUN wget https://github.com/arq5x/bedtools2/releases/download/v2.31.0/bedtools.static \
+	&& chmod +x bedtools.static \
+	&& mv bedtools.static bedtools
+
+#Set path
+ENV PATH /opt:$PATH
+
+
 # Default command
 CMD ["impg"]
