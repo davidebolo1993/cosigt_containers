@@ -32,6 +32,7 @@ RUN wget https://github.com/lh3/pangene/releases/download/v1.1/pangene-1.1-bin.t
 
 # Set env path
 ENV PATH /opt/pangene-1.1-bin/bin_x64-linux:$PATH
+ENV PATH /opt/pangene-1.1-bin/scripts:$PATH
 
 # Default command
 CMD ["pangene"]
