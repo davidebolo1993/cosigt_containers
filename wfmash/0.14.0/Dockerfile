@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     liblzma-dev \
     libbz2-dev \
     libhts-dev \
+    htslib \
     wget \
     ca-certificates \
     pkg-config \
