@@ -10,7 +10,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     cmake \
     zlib1g-dev \
     libgsl-dev \
-    libhts-dev \
     liblzma-dev \
     libbz2-dev \
     wget \
