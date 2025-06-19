@@ -17,7 +17,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     pkg-config \
     libjemalloc-dev \
-    samtools \
     && rm -rf /var/lib/apt/lists/*
 
 #Set workdir
@@ -34,6 +33,15 @@ RUN wget https://github.com/waveygang/wfmash/releases/download/v0.14.0/wfmash-v0
 # Set env path
 ENV PATH /opt/wfmash-v0.14.0/build/bin:$PATH
 
+#install bgzip
+RUN wget https://github.com/samtools/htslib/releases/download/1.22/htslib-1.22.tar.bz2 \
+	&& tar -jxvf htslib-1.22.tar.bz2 \
+	&& rm htslib-1.22.tar.bz2 \
+	&& cd htslib-1.22 \
+	&& ./configure \
+	&& make
+
+ENV PATH /opt/htslib-1.22:$PATH
 
 # Default command
 CMD ["wfmash"]
