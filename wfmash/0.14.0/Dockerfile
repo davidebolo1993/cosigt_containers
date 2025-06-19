@@ -13,11 +13,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     liblzma-dev \
     libbz2-dev \
     libhts-dev \
-    htslib-tools \
     wget \
     ca-certificates \
     pkg-config \
     libjemalloc-dev \
+    git \
     && rm -rf /var/lib/apt/lists/*
 
 #Set workdir
@@ -33,6 +33,14 @@ RUN wget https://github.com/waveygang/wfmash/releases/download/v0.14.0/wfmash-v0
 
 # Set env path
 ENV PATH /opt/wfmash-v0.14.0/build/bin:$PATH
+
+#we need bgzip
+
+RUN git clone --depth 1 --branch 1.22 https://github.com/samtools/htslib.git \
+    && cd htslib \
+    && make bgzip \
+    && cp bgzip /usr/local/bin/ \
+    && cd .. && rm -rf htslib
 
 # Default command
 CMD ["wfmash"]
