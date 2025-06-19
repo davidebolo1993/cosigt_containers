@@ -20,6 +20,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libncursesw5-dev \
     libbz2-dev \
     liblzma-dev \
+    curl \
+    libcurl-devel \
     && rm -rf /var/lib/apt/lists/*
 
 #Set workdir
