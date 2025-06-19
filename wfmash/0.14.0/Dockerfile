@@ -12,25 +12,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libgsl-dev \
     liblzma-dev \
     libbz2-dev \
+    libhts-dev \
     wget \
     ca-certificates \
     pkg-config \
-    curl \
-    libcurl4-openssl-dev \
     libjemalloc-dev \
     && rm -rf /var/lib/apt/lists/*
 
 #Set workdir
 WORKDIR /opt
-
-# htslib
-RUN wget https://github.com/samtools/htslib/releases/download/1.22/htslib-1.22.tar.bz2 \
-        && tar -jxvf htslib-1.22.tar.bz2 \
-        && rm htslib-1.22.tar.bz2 \
-        && cd htslib-1.22 \
-        && ./configure \
-        && make \
-        && make install
 
 # Install
 RUN wget https://github.com/waveygang/wfmash/releases/download/v0.14.0/wfmash-v0.14.0.tar.gz \
