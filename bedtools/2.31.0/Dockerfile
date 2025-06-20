@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     cmake \
     autoconf \
     g++ \
+    zlib1g-dev \
     ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 
