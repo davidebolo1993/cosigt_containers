@@ -16,6 +16,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libncursesw5-dev \
     libbz2-dev \
     liblzma-dev \
+    curl \
+    libcurl4-openssl-dev \
     ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 
