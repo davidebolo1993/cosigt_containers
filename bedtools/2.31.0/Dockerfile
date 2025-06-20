@@ -12,6 +12,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     autoconf \
     g++ \
     zlib1g-dev \
+    libncurses5-dev \
+    libncursesw5-dev \
+    libbz2-dev \
+    liblzma-dev \
     ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 
