@@ -29,7 +29,6 @@ RUN wget https://github.com/arq5x/bedtools2/releases/download/v2.31.0/bedtools.s
 	&& chmod +x bedtools.static \
 	&& mv bedtools.static bedtools
 
-
 # add htslib
 RUN wget https://github.com/samtools/htslib/releases/download/1.22/htslib-1.22.tar.bz2 \
 	&& tar -jxvf htslib-1.22.tar.bz2 \
