@@ -39,6 +39,14 @@ RUN wget https://github.com/samtools/htslib/releases/download/1.22/htslib-1.22.t
 	&& make \
 	&& make install
 
+# add samtools
+RUN wget https://github.com/samtools/samtools/releases/download/1.22/samtools-1.22.tar.bz2 \
+	&& tar -jxvf samtools-1.22.tar.bz2 \
+	&& rm samtools-1.22.tar.bz2 \
+	&& cd samtools-1.22 \
+	&& ./configure \
+	&& make \
+	&& make install
 
 #Set path
 ENV PATH /opt:$PATH
