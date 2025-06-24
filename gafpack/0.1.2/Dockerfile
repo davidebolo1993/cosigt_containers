@@ -25,7 +25,7 @@ WORKDIR /opt
 # Install gafpack
 RUN git clone https://github.com/pangenome/gafpack.git \
 	&& cd gafpack \
-	&& git checkout 72d6d7b72ccbb7dd519fcf29ae00d381d1571464 \
+	&& git checkout f08c04b4596bd9c40b0e62641f37c2500b956a1a \
 	&& cargo install --force --path .
 
 # Set env path
