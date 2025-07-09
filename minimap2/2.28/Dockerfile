@@ -46,7 +46,6 @@ RUN wget https://github.com/samtools/samtools/releases/download/1.22/samtools-1.
 # Set env path
 ENV PATH /opt/samtools-1.22:$PATH
 
-
 # Bgzip
 RUN wget https://github.com/samtools/htslib/releases/download/1.22/htslib-1.22.tar.bz2 \
 	&& tar -jxvf htslib-1.22.tar.bz2 \
