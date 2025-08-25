@@ -21,13 +21,11 @@ RUN apt-get update && \
     libncursesw5-dev \
     libbz2-dev \
     libhts-dev \
-    libbz2-dev \
     libssl-dev \
     liblzma-dev \
     curl \
     libcurl4-openssl-dev \
     && rm -rf /var/lib/apt/lists/*
-
 
 # Install Rust and maturin
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
