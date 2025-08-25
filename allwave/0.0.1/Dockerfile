@@ -20,7 +20,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     liblzma-dev \
     curl \
     libcurl4-openssl-dev \
-    libhts-dev \
+    libssl-dev \
     && rm -rf /var/lib/apt/lists/*
 
 
