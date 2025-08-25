@@ -1,5 +1,5 @@
 # Build stage
-FROM debian:bullseye-slim AS binary
+FROM ubuntu:latest
 
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
@@ -7,6 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Install all necessary build dependencies
 # This version resolves the libcurl conflict by pinning the openssl version
 RUN apt-get update && \
+    apt-et remove -y libcurl4-gnutls-dev || true \
     apt-get install -y --no-install-recommends \
         build-essential \
         cmake \
@@ -27,7 +28,6 @@ RUN apt-get update && \
         curl \
         # Pin the openssl version to resolve the conflict definitively
         libcurl4-openssl-dev \
-        libcurl4=7.74.0-1.3+deb11u15 && \
     # Clean up apt caches to reduce image size
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
