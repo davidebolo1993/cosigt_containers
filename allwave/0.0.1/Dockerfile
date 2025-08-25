@@ -27,7 +27,7 @@ RUN apt-get update && \
         liblzma-dev \
         curl \
         # Pin the openssl version to resolve the conflict definitively
-        libcurl4-openssl-dev \
+        libcurl4-openssl-dev && \
     # Clean up apt caches to reduce image size
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
