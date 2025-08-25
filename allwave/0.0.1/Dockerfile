@@ -4,12 +4,10 @@ FROM debian:bullseye-slim AS binary
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install build dependencies
+# Advanced dependency installation to bypass stubborn apt conflicts
 RUN apt-get update && \
-    # Explicitly remove the conflicting gnutls package first.
-    # The '|| true' ensures the command doesn't fail if the package isn't already present.
-    apt-get remove -y libcurl4-gnutls-dev || true && \
-    apt-get install -y --no-install-recommends \
+    # First, get a list of all dependency URLs without installing
+    apt-get install -y --no-install-recommends --print-uris \
         build-essential \
         cmake \
         autoconf \
@@ -27,14 +25,17 @@ RUN apt-get update && \
         libssl-dev \
         liblzma-dev \
         curl \
-        libcurl4-openssl-dev && \
-    # Clean up apt caches to reduce image size
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+        libcurl4-openssl-dev \
+    | grep -oP \"'http.*?deb'\" | sed \"s/'//g\" > /tmp/packages.list && \
+    # Now, download all packages using wget
+    wget --input-file /tmp/packages.list -P /var/cache/apt/archives && \
+    # Finally, install the downloaded packages using dpkg
+    dpkg -i /var/cache/apt/archives/*.deb && \
+    # Clean up
+    rm -rf /var/lib/apt/lists/* /tmp/packages.list
 
 # Install Rust and maturin
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
-# Correctly set the PATH for subsequent RUN commands using the recommended syntax
 ENV PATH="/root/.cargo/bin:${PATH}"
 
 RUN rustup update && \
@@ -43,17 +44,18 @@ RUN rustup update && \
 # Set workdir
 WORKDIR /opt
 
-# Clone the repository and build the project
+# Install gfainject
 RUN git clone https://github.com/pangenome/allwave && \
     cd allwave && \
     cargo build --release
 
-# Add the compiled binary to the PATH for the final container image
+# Set env path
 ENV PATH="/opt/allwave/target/release:${PATH}"
 
-# Verify the installation was successful
-RUN allwave --help
+# Example
+RUN /opt/allwave/target/release/allwave --help
 
-# Set the default command for the container
+# Default command
 CMD ["allwave"]
+
 
