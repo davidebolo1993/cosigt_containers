@@ -4,11 +4,10 @@ FROM debian:bullseye-slim AS binary
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Advanced dependency installation to bypass stubborn apt conflicts
-# This version fixes the shell quoting issue from the previous attempt.
+# Install all necessary build dependencies
+# This version resolves the libcurl conflict by pinning the openssl version
 RUN apt-get update && \
-    # Get a list of all dependency URLs without installing them
-    apt-get install -y --no-install-recommends --print-uris \
+    apt-get install -y --no-install-recommends \
         build-essential \
         cmake \
         autoconf \
@@ -26,15 +25,12 @@ RUN apt-get update && \
         libssl-dev \
         liblzma-dev \
         curl \
+        # Pin the openssl version to resolve the conflict definitively
         libcurl4-openssl-dev \
-    | grep -oP "'http.*?\.deb'" | sed "s/'//g" > /tmp/packages.list && \
-    # Download all the packages from the list
-    wget --input-file /tmp/packages.list -P /var/cache/apt/archives && \
-    # Install all the downloaded .deb files directly with dpkg
-    dpkg -i /var/cache/apt/archives/*.deb && \
-    # Clean up to reduce image size
+        libcurl4=7.74.0-1.3+deb11u15 && \
+    # Clean up apt caches to reduce image size
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/packages.list
+    rm -rf /var/lib/apt/lists/*
 
 # Install Rust and maturin
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
