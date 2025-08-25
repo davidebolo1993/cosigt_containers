@@ -6,7 +6,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install build dependencies
 RUN apt-get update && \
-    apt-get remove -y libcurl4-gnutls-dev || true && \
     apt-get install -y --no-install-recommends \
     build-essential \
     cmake \
