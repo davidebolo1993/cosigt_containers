@@ -5,8 +5,9 @@ FROM debian:bullseye-slim AS binary
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Advanced dependency installation to bypass stubborn apt conflicts
+# This version fixes the shell quoting issue from the previous attempt.
 RUN apt-get update && \
-    # First, get a list of all dependency URLs without installing
+    # Get a list of all dependency URLs without installing them
     apt-get install -y --no-install-recommends --print-uris \
         build-essential \
         cmake \
@@ -26,12 +27,13 @@ RUN apt-get update && \
         liblzma-dev \
         curl \
         libcurl4-openssl-dev \
-    | grep -oP \"'http.*?deb'\" | sed \"s/'//g\" > /tmp/packages.list && \
-    # Now, download all packages using wget
+    | grep -oP "'http.*?\.deb'" | sed "s/'//g" > /tmp/packages.list && \
+    # Download all the packages from the list
     wget --input-file /tmp/packages.list -P /var/cache/apt/archives && \
-    # Finally, install the downloaded packages using dpkg
+    # Install all the downloaded .deb files directly with dpkg
     dpkg -i /var/cache/apt/archives/*.deb && \
-    # Clean up
+    # Clean up to reduce image size
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/packages.list
 
 # Install Rust and maturin
@@ -44,18 +46,17 @@ RUN rustup update && \
 # Set workdir
 WORKDIR /opt
 
-# Install gfainject
+# Clone the repository and build the project
 RUN git clone https://github.com/pangenome/allwave && \
     cd allwave && \
     cargo build --release
 
-# Set env path
+# Add the compiled binary to the PATH
 ENV PATH="/opt/allwave/target/release:${PATH}"
 
-# Example
-RUN /opt/allwave/target/release/allwave --help
+# Verify the installation was successful
+RUN allwave --help
 
-# Default command
+# Set the default command for the container
 CMD ["allwave"]
-
 
