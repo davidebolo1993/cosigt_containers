@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Install all necessary build dependencies
 # This version resolves the libcurl conflict by pinning the openssl version
 RUN apt-get update && \
-    apt-get remove -y libcurl4-gnutls-dev || true \
+    apt-get remove -y libcurl4-gnutls-dev || true && \
     apt-get install -y --no-install-recommends \
         build-essential \
         cmake \
