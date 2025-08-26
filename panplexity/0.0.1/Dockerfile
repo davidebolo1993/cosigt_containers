@@ -37,7 +37,7 @@ WORKDIR /opt
 # Install gfainject
 RUN git clone https://github.com/AndreaGuarracino/panplexity \
 	&& cd panplexity \
-	&& git checkout 0e40898bf3a352fb6da7c90b228da2c989a683eb \
+	&& git checkout 8c0d54ba2e28a71f6ad0997e6b7679e396a309e3 \
 	&& cargo install --force --path .
 
 # Set env path
