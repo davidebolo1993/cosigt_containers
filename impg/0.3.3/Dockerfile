@@ -1,5 +1,5 @@
 # Build stage
-FROM debian:bullseye-slim AS binary
+FROM debian:bookworm-slim AS binary
 
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
