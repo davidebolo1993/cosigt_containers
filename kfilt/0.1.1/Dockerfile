@@ -28,7 +28,14 @@ RUN go version
 # Set workdir
 WORKDIR /opt
 
-# Install cosigt
+# Install meryl
+RUN wget https://github.com/marbl/meryl/releases/download/v1.4.1/meryl-1.4.1.Linux-amd64.tar.xz \
+	&& tar -xf meryl-1.4.1.Linux-amd64.tar.xz \
+	&& rm meryl-1.4.1.Linux-amd64.tar.xz
+
+ENV PATH /opt/meryl-1.4.1/bin:$PATH
+
+# Install kfilt
 RUN git clone https://github.com/davidebolo1993/kfilt \
 	&& cd kfilt \
 	&& git checkout fd7fc868a6927095b277dc4d679e5e8cd51e48dd \
