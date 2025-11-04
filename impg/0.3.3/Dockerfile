@@ -27,7 +27,7 @@ WORKDIR /opt
 # Install impg
 RUN git clone https://github.com/pangenome/impg \
 	&& cd impg \
-	&& git checkout ff413138530d0320a5622273909c371cad0936c6 \
+	&& git checkout 82e45ab82360ff4fbaca2b7900375867b4971308 \
 	&& cargo install --force --path .
 
 # Set env path
