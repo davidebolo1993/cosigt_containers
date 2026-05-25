@@ -38,7 +38,7 @@ WORKDIR /opt
 RUN git clone https://github.com/AndreaGuarracino/gfainject \
 	&& cd gfainject \
 	&& git checkout 889b9f934ef23d3b804a8ff8c085bda2b9224e7c \
-	&& cargo install --force --path .
+	&& cargo install --locked --force --path .
 
 # Set env path
 ENV PATH /opt/gfainject/target/release:$PATH
