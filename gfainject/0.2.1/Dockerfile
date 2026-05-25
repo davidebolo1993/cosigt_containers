@@ -44,10 +44,10 @@ RUN git clone https://github.com/AndreaGuarracino/gfainject \
 ENV PATH /opt/gfainject/target/release:$PATH
 
 #Install samtools
-RUN wget https://github.com/samtools/samtools/releases/download/1.22/samtools-1.22.tar.bz2 \
-	&& tar -jxvf samtools-1.22.tar.bz2 \
-	&& rm samtools-1.22.tar.bz2 \
-	&& cd samtools-1.22 \
+RUN wget https://github.com/samtools/samtools/releases/download/1.23.1/samtools-1.23.1.tar.bz2 \
+	&& tar -jxvf samtools-1.23.1.tar.bz2 \
+	&& rm samtools-1.23.1.tar.bz2 \
+	&& cd samtools-1.23.1 \
 	&& ./configure \
 	&& make \
 	&& make install

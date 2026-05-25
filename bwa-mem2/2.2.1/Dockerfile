@@ -34,15 +34,15 @@ RUN wget https://github.com/bwa-mem2/bwa-mem2/releases/download/v2.2.1/bwa-mem2-
 ENV PATH /opt/bwa-mem2-2.2.1_x64-linux:$PATH
 
 # Install samtools
-RUN wget https://github.com/samtools/samtools/releases/download/1.21/samtools-1.21.tar.bz2 \
-        && tar -jxvf samtools-1.21.tar.bz2 \
-        && rm samtools-1.21.tar.bz2 \
-        && cd samtools-1.21 \
+RUN wget https://github.com/samtools/samtools/releases/download/1.23.1/samtools-1.23.1.tar.bz2 \
+        && tar -jxvf samtools-1.23.1.tar.bz2 \
+        && rm samtools-1.23.1.tar.bz2 \
+        && cd samtools-1.23.1 \
         && ./configure \
         && make
 
 # Set env path
-ENV PATH /opt/samtools-1.21:$PATH
+ENV PATH /opt/samtools-1.23.1:$PATH
 
 # Default command
 CMD ["bwa-mem2 mem"]

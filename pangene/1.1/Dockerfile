@@ -37,10 +37,10 @@ ENV PATH /opt/pangene-1.1-bin/bin_x64-linux:$PATH
 ENV PATH /opt/pangene-1.1-bin/scripts:$PATH
 
 # Install htslib
-RUN wget https://github.com/samtools/htslib/releases/download/1.22/htslib-1.22.tar.bz2 \
-	&& tar -jxvf htslib-1.22.tar.bz2 \
-	&& rm htslib-1.22.tar.bz2 \
-	&& cd htslib-1.22 \
+RUN wget https://github.com/samtools/htslib/releases/download/1.23.1/htslib-1.23.1.tar.bz2 \
+	&& tar -jxvf htslib-1.23.1.tar.bz2 \
+	&& rm htslib-1.23.1.tar.bz2 \
+	&& cd htslib-1.23.1 \
 	&& ./configure \
 	&& make \
 	&& make install

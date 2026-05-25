@@ -36,25 +36,25 @@ RUN wget https://github.com/lh3/minimap2/releases/download/v2.31/minimap2-2.31_x
 ENV PATH /opt/minimap2-2.31_x64-linux:$PATH
 
 # Install samtools
-RUN wget https://github.com/samtools/samtools/releases/download/1.23/samtools-1.23.tar.bz2 \
-        && tar -jxvf samtools-1.23.tar.bz2 \
-        && rm samtools-1.23.tar.bz2 \
-        && cd samtools-1.23 \
+RUN wget https://github.com/samtools/samtools/releases/download/1.23.1/samtools-1.23.1.tar.bz2 \
+        && tar -jxvf samtools-1.23.1.tar.bz2 \
+        && rm samtools-1.23.1.tar.bz2 \
+        && cd samtools-1.23.1 \
         && ./configure \
         && make
 
 # Set env path
-ENV PATH /opt/samtools-1.23:$PATH
+ENV PATH /opt/samtools-1.23.1:$PATH
 
 # Bgzip
-RUN wget https://github.com/samtools/htslib/releases/download/1.23/htslib-1.23.tar.bz2 \
-	&& tar -jxvf htslib-1.23.tar.bz2 \
-	&& rm htslib-1.23.tar.bz2 \
-	&& cd htslib-1.23 \
+RUN wget https://github.com/samtools/htslib/releases/download/1.23.1/htslib-1.23.1.tar.bz2 \
+	&& tar -jxvf htslib-1.23.1.tar.bz2 \
+	&& rm htslib-1.23.1.tar.bz2 \
+	&& cd htslib-1.23.1 \
 	&& ./configure \
 	&& make
 
-ENV PATH /opt/htslib-1.23:$PATH
+ENV PATH /opt/htslib-1.23.1:$PATH
 
 # Default command
 CMD ["minimap2"]

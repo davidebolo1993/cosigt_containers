@@ -34,7 +34,7 @@ RUN cargo install --locked maturin
 #Set workdir
 WORKDIR /opt
 
-# Install gfainject
+# Install panplexity
 RUN git clone https://github.com/AndreaGuarracino/panplexity \
 	&& cd panplexity \
 	&& git checkout 9e80407720d9cceb9fe4893894fe86ec580d4f46 \

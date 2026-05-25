@@ -36,16 +36,16 @@ RUN git clone https://github.com/lh3/bwa.git \
 ENV PATH /opt/bwa:$PATH
 
 # Install also samtools since we use bwa in combination with samtools most of the time
-RUN wget https://github.com/samtools/samtools/releases/download/1.22/samtools-1.22.tar.bz2 \
-	&& tar -jxvf samtools-1.22.tar.bz2 \
-	&& rm samtools-1.22.tar.bz2 \
-	&& cd samtools-1.22 \
+RUN wget https://github.com/samtools/samtools/releases/download/1.23.1/samtools-1.23.1.tar.bz2 \
+	&& tar -jxvf samtools-1.23.1.tar.bz2 \
+	&& rm samtools-1.23.1.tar.bz2 \
+	&& cd samtools-1.23.1 \
 	&& ./configure \
 	&& make \
 	&& make install
 
 # Set env path
-ENV PATH /opt/samtools-1.22:$PATH
+ENV PATH /opt/samtools-1.23.1:$PATH
 
 # Default command
 CMD ["bwa"]

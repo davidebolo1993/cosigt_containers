@@ -21,8 +21,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libbz2-dev \
     liblzma-dev \
     curl \
-    libopenmpi-dev \
-    openmpi-bin \
     libcurl4-openssl-dev \
     && rm -rf /var/lib/apt/lists/*
 
@@ -30,11 +28,22 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 WORKDIR /opt
 
 # Install samtools
-RUN git clone https://github.com/lh3/ropebwt3 \
-	&& cd ropebwt3 \
-	&& make
+RUN wget https://github.com/samtools/samtools/releases/download/1.23.1/samtools-1.23.1.tar.bz2 \
+	&& tar -jxvf samtools-1.23.1.tar.bz2 \
+	&& rm samtools-1.23.1.tar.bz2 \
+	&& cd samtools-1.23.1 \
+	&& ./configure \
+	&& make \
+	&& make install
 
-ENV PATH /opt/ropebwt3:$PATH
+# Install htslib
+RUN wget https://github.com/samtools/htslib/releases/download/1.23.1/htslib-1.23.1.tar.bz2 \
+	&& tar -jxvf htslib-1.23.1.tar.bz2 \
+	&& rm htslib-1.23.1.tar.bz2 \
+	&& cd htslib-1.23.1 \
+	&& ./configure \
+	&& make \
+	&& make install
 
 # Default command
-CMD ["ropebwt3"]
+CMD ["samtools"]

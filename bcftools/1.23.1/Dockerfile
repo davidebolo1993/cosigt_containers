@@ -8,41 +8,42 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     cmake \
+    autoconf \
+    g++ \
+    git \
     zlib1g-dev \
-    libgsl-dev \
-    liblzma-dev \
-    libbz2-dev \
-    libhts-dev \
     wget \
+    make \
     ca-certificates \
     pkg-config \
-    libjemalloc-dev \
+    libncurses5-dev \
+    libncursesw5-dev \
+    libbz2-dev \
+    liblzma-dev \
+    curl \
+    libcurl4-openssl-dev \
     && rm -rf /var/lib/apt/lists/*
 
 #Set workdir
 WORKDIR /opt
 
-# Install
-RUN wget https://github.com/waveygang/wfmash/releases/download/v0.14.0/wfmash-v0.14.0.tar.gz \
-	&& tar -xvzf wfmash-v0.14.0.tar.gz \
-	&& rm wfmash-v0.14.0.tar.gz \
-	&& cd wfmash-v0.14.0 \
-	&& cmake -H. -Bbuild \
-	&& cmake --build build -- -j 8
+# Install samtools
+RUN wget https://github.com/samtools/bcftools/releases/download/1.23.1/bcftools-1.23.1.tar.bz2 \
+	&& tar -jxvf bcftools-1.23.1.tar.bz2 \
+	&& rm bcftools-1.23.1.tar.bz2 \
+	&& cd bcftools-1.23.1 \
+	&& ./configure \
+	&& make \
+	&& make install
 
-# Set env path
-ENV PATH /opt/wfmash-v0.14.0/build/bin:$PATH
-
-#install bgzip
+# Install htslib
 RUN wget https://github.com/samtools/htslib/releases/download/1.23.1/htslib-1.23.1.tar.bz2 \
 	&& tar -jxvf htslib-1.23.1.tar.bz2 \
 	&& rm htslib-1.23.1.tar.bz2 \
 	&& cd htslib-1.23.1 \
 	&& ./configure \
-	&& make
-
-ENV PATH /opt/htslib-1.23.1:$PATH
+	&& make \
+	&& make install
 
 # Default command
-CMD ["wfmash"]
-
+CMD ["samtools"]
