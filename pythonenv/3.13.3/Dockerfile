@@ -18,7 +18,7 @@ RUN bash Miniconda3-latest-Linux-x86_64.sh -p /miniconda -b && \
 ENV PATH=/miniconda/bin:${PATH}
 RUN conda update -y conda && \
         conda create -y -n pythonenv -c conda-forge -c bioconda \
-	python=3.13.1 \
+	python=3.13.3 \
 	pandas=2.2.3 \
         numpy=2.2.1
 RUN echo "source activate pythonenv" > ~/.bashrc
