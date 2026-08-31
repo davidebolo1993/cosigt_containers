@@ -21,13 +21,16 @@ WORKDIR /opt
 
 #Install edlib
 RUN git clone https://github.com/Martinsos/edlib.git \
+	&& cd edlib \
+	&& git checkout v1.2.7 \
+	&& cd .. \
 	&& cd edlib/build \
 	&& cmake -D CMAKE_BUILD_TYPE=Release .. \
 	&& make \
 	&& make install
 
 #compile the script
-RUN wget https://raw.githubusercontent.com/davidebolo1993/cosigt/refs/heads/master/cosigt_smk/workflow/scripts/compute_qv.cpp \
+RUN wget https://raw.githubusercontent.com/davidebolo1993/cosigt/refs/tags/v0.2/cosigt_smk/workflow/scripts/compute_qv.cpp \
 	&& g++ compute_qv.cpp -ledlib -o compute_qv
 
 # Set env path
