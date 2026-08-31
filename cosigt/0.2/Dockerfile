@@ -34,7 +34,7 @@ RUN git clone https://github.com/davidebolo1993/cosigt.git \
 	&& git checkout v0.2 \
 	&& go mod init cosigt \
 	&& go mod tidy \
-	&& go build cosigt \
+	&& go build -o cosigt ./cmd/cosigt \
 	&& cp cosigt ../cosigt-tmp \
 	&& cd .. \
 	&& rm -rf cosigt \
