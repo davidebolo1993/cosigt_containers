@@ -22,7 +22,7 @@ RUN apt-get -y clean all \
 RUN wget https://go.dev/dl/go1.19.1.linux-amd64.tar.gz \
     && tar -C /usr/local -xzf go1.19.1.linux-amd64.tar.gz \
     && rm go1.19.1.linux-amd64.tar.gz
-ENV PATH $PATH:/usr/local/go/bin
+ENV PATH=$PATH:/usr/local/go/bin
 RUN go version
 
 # Set workdir
@@ -41,7 +41,7 @@ RUN git clone https://github.com/davidebolo1993/cosigt.git \
 	&& mv cosigt-tmp cosigt
 
 # Set path
-ENV PATH /opt:$PATH
+ENV PATH=/opt:$PATH
 
 # Default command
 CMD ["cosigt"]

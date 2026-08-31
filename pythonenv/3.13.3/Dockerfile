@@ -16,10 +16,12 @@ RUN curl -LO https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.
 RUN bash Miniconda3-latest-Linux-x86_64.sh -p /miniconda -b && \
     rm Miniconda3-latest-Linux-x86_64.sh
 ENV PATH=/miniconda/bin:${PATH}
+RUN conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main \
+ && conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
 RUN conda update -y conda && \
         conda create -y -n pythonenv -c conda-forge -c bioconda \
 	python=3.13.3 \
 	pandas=2.2.3 \
         numpy=2.2.1
 RUN echo "source activate pythonenv" > ~/.bashrc
-ENV PATH /miniconda/envs/pythonenv/bin:$PATH
+ENV PATH=/miniconda/envs/pythonenv/bin:$PATH
