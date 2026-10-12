@@ -1,11 +1,15 @@
 # bwa-mem3 publishes no prebuilt binaries, and building it from source needs a
-# newer compiler than bullseye ships, plus libsais and OpenMP. The bioconda build
+# newer compiler than these Debian images ship, plus libsais and OpenMP. The bioconda build
 # is installed instead, which also means SOFTWARE=apptainer and SOFTWARE=conda run
 # the same binaries.
 #
 # micromamba rather than Miniconda: it is pinned, and it never touches
 # repo.anaconda.com, so there are no channel Terms of Service to accept.
-FROM debian:bullseye-slim
+#
+# bookworm rather than the bullseye the other images use: Debian 11 left LTS on
+# 2026-08-31 and its security archive moved to archive.debian.org, so apt on
+# bullseye now fails with 404s for curl, openssl and ca-certificates.
+FROM debian:bookworm-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 
